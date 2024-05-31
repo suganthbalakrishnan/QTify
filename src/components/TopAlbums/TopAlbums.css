@@ -1,0 +1,26 @@
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font: poppins;
+    cursor: pointer;
+    padding: 0px 30px;
+  }
+  .top-albums {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+  }
+  .toggletext {
+    color: var(--primary-color);
+    
+  }
+  .topalbum-wrapper {
+    margin-top: 18px;
+    margin-bottom: 18px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+
+  

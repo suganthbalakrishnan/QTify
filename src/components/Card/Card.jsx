@@ -1,56 +1,53 @@
 import React from "react";
-import styles from "./Card.module.css";
 import { Tooltip, Chip } from "@mui/material";
-import { Link } from "react-router-dom";
+import "./Card.module.css";
 
-function Card({ data, type }) {
+const Card = ({ data, type }) => {
   const getCard = (type) => {
     switch (type) {
       case "album": {
-        const { image, songs, slug, follows, title } = data;
+        const { image, title,  follows, songs } = data;
         return (
           <Tooltip title={`${songs.length} songs`} placement="top" arrow>
-            <Link to={`/album/${slug}`}>
-              <div className={styles.wrapper}>
-                <div className={styles.card}>
-                  <img src={image} alt="album" loading="lazy" />
-                  <div className={styles.banner}>
-                    <Chip
-                      label={`${follows} Follows`}
-                      size="small"
-                      className={styles.chip}
-                    />
-                  </div>
+            <div className="wrapper">
+              <div className="card">
+                <img src={image} alt="album" />
+                <div className="banner">
+                  <Chip
+                    label={`${follows} Follows`}
+                    size="small"
+                    className="chip"
+                  />
                 </div>
-
-                <div className={styles.titleWrapper}>{title}</div>
               </div>
-            </Link>
+              <div className="toptitle">
+                <p>{title}</p>
+              </div>
+            </div>
           </Tooltip>
         );
       }
-      case "song": {
+      case "songs": {
         const { image, likes, title } = data;
         return (
-          <div className={styles.wrapper}>
-            <div className={styles.card}>
+          <div className="wrapper">
+            <div className="card">
               <img src={image} alt="song" loading="lazy" />
-              <div className={styles.banner}>
-                <div className={styles.pill}>
-                  <p>{likes} Likes</p>
-                </div>
+              <div className="banner">
+                <Chip label={`${likes} Likes`} size="small" className="chip" />
               </div>
             </div>
-
-            <div className={styles.titleWrapper}>{title}</div>
+            <div className="toptitle">
+              <p>{title}</p>
+            </div>
           </div>
         );
       }
       default:
-        return <></>;
+        return null;
     }
   };
   return getCard(type);
-}
+};
 
 export default Card;

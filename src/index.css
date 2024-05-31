@@ -1,4 +1,4 @@
-:root {
+  :root {
   --color-primary: #34c94b;
   --color-black: #121212;
   --color-white: #ffffff;
@@ -52,13 +52,14 @@ h6 {
   isolation: isolate;
 }
 
-.swiper-slide {
+/* .swiper-slide {
   width: auto !important;
-}
+} */
 
-a, 
+/* a, 
 a:hover,
 a:active {
   text-decoration: none;
   color: inherit;
-}
+}  */
+

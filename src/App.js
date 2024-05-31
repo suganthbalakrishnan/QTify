@@ -14,42 +14,69 @@
 // export default App;
 
 
-import { Outlet } from 'react-router-dom';
-import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import {  fetchNewAlbums, fetchSongs, fetchTopAlbums } from './api/api';
-import { useEffect, useState } from 'react';
-import Hero from './components/Hero/Hero';
+// import { Outlet } from 'react-router-dom';
+// import './App.css';
+// import Navbar from './components/Navbar/Navbar';
+// import {  fetchNewAlbums, fetchSongs, fetchTopAlbums } from './api/api';
+// import { useEffect, useState } from 'react';
+// import Hero from './components/Hero/Hero';
+// // import { Card } from '@mui/material';
+// import Card from './components/Card/Card';
 
-function App() {
+// function App() {
   
-  const [data, setData] = useState({});
+//   const [data, setData] = useState({});
 
-  const generateData = (key, source) => {
-    source().then((data) => {
-      setData((prevData) => {
-        return {...prevData, [key]: data};
-      })
-    })
-  }
+//   const generateData = (key, source) => {
+//     source().then((data) => {
+//       setData((prevData) => {
+//         return {...prevData, [key]: data};
+//       })
+//     })
+//   }
   
-   useEffect(() => {
-    generateData("topAlbums", fetchTopAlbums);
-    generateData("newAlbums", fetchNewAlbums);
-    generateData("songs", fetchSongs);
-   }, [])
+//    useEffect(() => {
+//     generateData("topAlbums", fetchTopAlbums);
+//     generateData("newAlbums", fetchNewAlbums);
+//     generateData("songs", fetchSongs);
+//    }, [])
 
-const {topAlbums = [], newAlbums = [], songs = []} = data;
+// const {topAlbums = [], newAlbums = [], songs = []} = data;
 
+//   return (
+//    <>
+//        <div>
+//         <Navbar />
+//         <Hero />
+//         <Card />
+//         <Outlet context={{ data: {topAlbums, newAlbums, songs}}} />
+//        </div>
+//    </>
+//   );
+// }
+
+// export default App;
+
+
+
+import "./index.css";
+import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero/Hero";
+import TopAlbums from "./components/TopAlbums/TopAlbums";
+import NewAlbums from "./components/NewAlbums/NewAlbums";
+import Songs from "./components/Songs/Songs";
+
+export default function App() {
   return (
-   <>
-       <div>
-        <Navbar />
-        <Hero />
-        <Outlet context={{ data: {topAlbums, newAlbums, songs}}} />
-       </div>
-   </>
+    <div className="App">
+      <Navbar />
+      <Hero />
+      <TopAlbums />
+      <NewAlbums />
+      <Songs />
+    </div>
   );
 }
 
-export default App;
+
+
