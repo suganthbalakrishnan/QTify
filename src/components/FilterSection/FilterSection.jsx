@@ -1,39 +1,67 @@
-// import React, { useEffect } from 'react'
-import styles from "./FilterSection.module.css";
-// import Section from '../Section/Section';
-import BasicTabs from '../BasicTabs/BasicTabs';
-import Carousel from '../Carousel/Carousel';
-import Card from '../Card/Card';
-import { CircularProgress } from '@mui/material';
-// import audio from '/some path'
+import React from 'react';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import styles from './Filters.module.css';
 
-const FilterSection = ({type, title, value, filteredData, handleChangeIndex}) => {
 
-    // function playSound(){
-    //     let sound = new Audio(audio)
-    //     sound.play()
-    // }
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <div className={styles.wrapper}>
-       
-            <div className={styles.heading}>
-               <h3>{title}</h3> 
-            </div>
-            <BasicTabs handleChangeIndex={handleChangeIndex}/>
-        {filteredData.length?(
-                <div className={styles.cardsWrapper}>
-                    <Carousel data={filteredData} renderCardComponent={(filteredData)=><Card data={filteredData} type={type}/>}/>
-                </div>
-        ):(
-            <div  className={styles.progressBar}>
-                <CircularProgress/>
-            </div>
-        )}
-
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
-  )
+  );
 }
 
-export default FilterSection
+
+export default function Filters({filters, selectedFilterIndex, setSelectedFilterIndex}) {
+  
+    
+function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
+
+  const handleChange = (event, newValue) => {
+    setSelectedFilterIndex(newValue);
+  };
+
+  return (
+       <div>
+        <Tabs value={selectedFilterIndex} 
+        onChange={handleChange} 
+        aria-label="basic tabs example"
+        TabIndicatorProps={{
+          style: {
+            backgroundColor: 'var(--color-primary)'
+
+          },     
+        }}>
+         {filters.map((ele, idx) => (
+               <Tab className={styles.tab} label={ele.label} {...a11yProps(idx)} />
+         ))}
+          
+        </Tabs>
+        
+        {filters.map((ele, idx) => (
+               <TabPanel value={ele.label} index={idx} />
+         ))}
+    </div>
+  );
+}
